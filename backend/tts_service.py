@@ -1,16 +1,18 @@
 import os
-from TTS.api import TTS
+import pyttsx3
 
-# Load the TTS model (do this once to avoid reloading every time)
-tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False, gpu=False)
-
-
-def text_to_speech(text: str, output_path: str):
-    """
-    Generate TTS audio from text and save it to the given path.
-    """
-    # Ensure output directory exists
+def text_to_speech(text: str, output_path: str = "temp/audio/test_output.wav") -> str:
+    # Ensure the directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
+    engine = pyttsx3.init()
+    engine.save_to_file(text, output_path)  # Make sure this is a file, not a folder
+    engine.runAndWait()
+    
+    return output_path
 
-    # Generate and save the speech
-    tts.tts_to_file(text=text, file_path=output_path)
+if __name__ == "__main__":
+    sample_text = "Explain Artificial Intelligence (AI) in simple terms. What is it, how does it work, and what are its main applications in today's world? Include information on its types (Narrow AI vs. General AI), key techniques like Machine Learning and Deep Learning, and common use cases in industries like healthcare, transportation, and entertainment."
+    output_file = "temp/audio/test_output2.wav"
+    path = text_to_speech(sample_text, output_file)
+    print(f"✅ Audio saved to: {path}")

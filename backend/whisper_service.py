@@ -19,3 +19,9 @@ def transcribe_audio(audio_path: str) -> str:
 
     except Exception as e:
         raise RuntimeError(f"OpenAI Whisper API transcription failed: {e}")
+    
+
+if __name__ == "__main__":
+    audio_input = "path_to_your_audio_file.wav"  # Specify your audio file here
+    transcription = transcribe_audio(audio_input)
+    print(f"Transcription: {transcription}")

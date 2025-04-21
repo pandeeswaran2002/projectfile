@@ -1,4 +1,50 @@
+# Core AI & ML
+torch==2.1.2+cu118       # GPU-enabled PyTorch for CUDA 11.8
+torchaudio==2.1.2+cu118
+torchvision==0.16.2+cu118
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+# Whisper (speech to text)
+git+https://github.com/openai/whisper.git
+
+# Coqui TTS (text to speech)
 TTS==0.22.0
+
+# Wav2Lip dependencies
 numpy==1.24.4
-spacy==3.7.2
-thinc==8.2.2
+scipy==1.10.1
+opencv-python==4.9.0.80
+matplotlib==3.7.5
+numba==0.57.1
+imageio==2.33.1
+imageio-ffmpeg==0.4.9
+scikit-image==0.21.0
+dlib==19.24.2
+face-recognition==1.3.0
+ffmpeg-python==0.2.0
+audioread==3.0.1
+moviepy==1.0.3
+TTS==0.21.1
+
+
+# FastAPI + server
+fastapi==0.110.0
+uvicorn==0.29.0
+
+# RAG (retrieval)
+faiss-cpu==1.7.4
+langchain==0.1.13
+
+# LLM API (Groq/Mixtral)
+openai==1.16.1
+httpx==0.27.0
+
+# Utils
+pydantic==1.10.13
+python-dotenv==1.0.1
+requests==2.31.0
+
+
+
+
+
