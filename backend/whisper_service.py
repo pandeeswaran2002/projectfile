@@ -1,27 +1,22 @@
+from openai import OpenAI
 import os
-import openai
 
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # Initialize the OpenAI API with your API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def transcribe_audio(audio_path: str) -> str:
+def transcribe_audio(audio_path):
     try:
-        # Open the audio file in binary mode and send it to OpenAI API for transcription
         with open(audio_path, "rb") as audio_file:
-            response = openai.Audio.transcribe(
-                model="whisper-1",  # Use Whisper model for transcription
+            response = client.audio.transcriptions.create(
+                model="whisper-1",
                 file=audio_file
             )
-
-        # Get the transcription from the response
-        transcription = response['text']
-        return transcription
-
+        return response.text
     except Exception as e:
         raise RuntimeError(f"OpenAI Whisper API transcription failed: {e}")
     
 
 if __name__ == "__main__":
-    audio_input = "path_to_your_audio_file.wav"  # Specify your audio file here
+    audio_input =  r"C:\ai-avatar-sales-agent\backend\temp\audio\test_output1.wav"  # Specify your audio file here
     transcription = transcribe_audio(audio_input)
     print(f"Transcription: {transcription}")

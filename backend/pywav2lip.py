@@ -45,15 +45,15 @@ def generate_lip_sync_from_image(image_path, audio_path, wav2lip_output_path):
     os.makedirs(os.path.dirname(wav2lip_output_path), exist_ok=True)
 
     # Step 1: Convert image to video
-    silent_video_path = "temp/downscaled_face.mp4"
+    silent_video_path = r"C:\ai-avatar-sales-agent\backend\temp\downscaled_face.mp4"
     success = create_video_from_image(image_path, silent_video_path)
     if not success:
         return
 
     # Step 2: Run Wav2Lip inference
     command = [
-        "python", "models/wav2lip/inference.py",
-        "--checkpoint_path", "models/wav2lip/wav2lip.pth",
+        "python", r"C:\ai-avatar-sales-agent\backend\models\wav2lip\inference.py",
+        "--checkpoint_path", r"C:\ai-avatar-sales-agent\backend\models\wav2lip\wav2lip.pth",
         "--face", silent_video_path,
         "--audio", audio_path,
         "--outfile", wav2lip_output_path
@@ -83,19 +83,19 @@ def mux_audio_video(video_path, audio_path, final_output_path):
 
 if __name__ == "__main__":
     # 🖼️ Input image of avatar (2D face)
-    image_path = "models/wav2lip/avatar.jpg"
+    image_path = r"C:\ai-avatar-sales-agent\backend\models\wav2lip\avatar.jpg"
 
     # 🔊 Audio file (generated using TTS)
-    audio_file = "temp/audio/test_outputcr7.wav"
+    audio_file = r"C:\ai-avatar-sales-agent\backend\temp\audio\test_output.wav"
 
     # 🆔 Generate unique video ID
     video_id = str(uuid.uuid4())[:8]
 
     # 🎥 Intermediate output (lip-sync without audio)
-    wav2lip_output = f"temp/video/response_{video_id}.mp4"
+    wav2lip_output = rf"C:\ai-avatar-sales-agent\backend\temp\video\response_{video_id}.mp4"
 
     # 🎞️ Final output with audio
-    final_output = f"temp/video/final_{video_id}.mp4"
+    final_output = rf"C:\ai-avatar-sales-agent\backend\temp\video\final_{video_id}.mp4"
 
     # Step 1: Generate silent lip-sync video
     generate_lip_sync_from_image(image_path, audio_file, wav2lip_output)
